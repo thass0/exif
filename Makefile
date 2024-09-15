@@ -7,11 +7,10 @@ CC = gcc
 all: $(TARGET)
 
 $(TARGET): $(OBJ)
-	$(CC) -o $(TARGET) $^
+	$(CC) -fsanitize=address -g -o $(TARGET) $^
 
 .c.o:
 	$(CC) $(CFLAGS) -c $<
 
 clean:
 	rm -f $(OBJ) $(TARGET)
-
