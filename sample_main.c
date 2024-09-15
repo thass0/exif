@@ -24,6 +24,8 @@
 #include <windows.h>
 #endif
 #include <stdio.h>
+#include <stdlib.h>
+#include <string.h>
 
 #include "exif.h"
 
@@ -183,7 +185,7 @@ int sample_removeSensitiveData(const char *srcJpgFileName, const char *outJpgFil
     // remove GPS IFD and 1st IFD if exist
     removeIfdTableFromIfdTableArray(ifdTableArray, IFD_GPS);
     removeIfdTableFromIfdTableArray(ifdTableArray, IFD_1ST);
-    
+
     // remove tags if exist
     removeTagNodeFromIfdTableArray(ifdTableArray, IFD_0TH, TAG_Make);
     removeTagNodeFromIfdTableArray(ifdTableArray, IFD_0TH, TAG_Model);
@@ -204,7 +206,7 @@ int sample_removeSensitiveData(const char *srcJpgFileName, const char *outJpgFil
     removeTagNodeFromIfdTableArray(ifdTableArray, IFD_EXIF, TAG_LensMake);
     removeTagNodeFromIfdTableArray(ifdTableArray, IFD_EXIF, TAG_LensModel);
     removeTagNodeFromIfdTableArray(ifdTableArray, IFD_EXIF, TAG_LensSerialNumber);
-    
+
     // update the Exif segment
     sts = updateExifSegmentInJPEGFile(srcJpgFileName, outJpgFileName, ifdTableArray);
     if (sts < 0) {
